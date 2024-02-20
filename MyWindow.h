@@ -1,6 +1,7 @@
 #ifndef MYWINDOW_H
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QApplication>
+#include "j1939validator.h"
 
 QT_BEGIN_NAMESPACE
 class QLineEdit;
@@ -15,13 +16,9 @@ Q_OBJECT
 public:
     MyWindow(QWidget* parent = nullptr);
 
-private:
-    //QGroupBox *formGroupBox;
 
-    QLineEdit *pgnLineEdit1;
-    QLineEdit *pgnLineEdit2;
-    QLineEdit *pgnLineEdit3;
-    QLineEdit *pgnLineEdit4;
+private:
+    J1939Validator * pgnValidForm = new J1939Validator;
 
 
 };

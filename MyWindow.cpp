@@ -9,6 +9,8 @@
 #include <QLabel>
 #include <QLineEdit>
 #include <QDialogButtonBox>
+#include "J1939Validator.h"
+
 //#include <QMenuBar>
 
 //! [0]
@@ -25,24 +27,50 @@ MyWindow::MyWindow(QWidget* parent)
 //! [0]
 
 //! [1]
-    QComboBox *txMethodCombo = new QComboBox;
-    txMethodCombo->addItems(QStringList()<<"Cyclic"<<"OnEvent"<<"OnChange");
-    QComboBox *dlc = new QComboBox;
-    dlc->addItems(QStringList()<<"0"<<"1"<<"2"<<"3"<<"4"<<"5"<<"6"<<"7");
-    QComboBox *priority = new QComboBox;
-    priority->addItems(QStringList()<<"7"<<"6"<<"5"<<"4"<<"3"<<"2"<<"1");
+    QLabel *pgnNameL = new QLabel(tr("Name"));
+    QLineEdit *pgnName = new QLineEdit;
+    pgnName->setValidator(pgnValidForm->pgnValidName);
 
-    formLayout->addRow(new QLabel(tr("Name:")), new QLineEdit);
-    formLayout->addRow(new QLabel(tr("Number:")), new QLineEdit);
-    formLayout->addRow(new QLabel(tr("TX Method")), txMethodCombo);
-    formLayout->addRow(new QLabel(tr("TX Rate:")), new QLineEdit);
-    formLayout->addRow(new QLabel(tr("DLC:")), dlc);
-    formLayout->addRow(new QLabel(tr("Data Page:")), new QLineEdit);
-    formLayout->addRow(new QLabel(tr("Ext Data Page:")), new QLineEdit);
-    formLayout->addRow(new QLabel(tr("Priority:")), priority);
+    QLabel *pgnNumberL = new QLabel(tr("Number"));
+    QLineEdit *pgnNumber = new QLineEdit;
+    pgnNumber->setValidator(pgnValidForm->pgnValidNumber);
+
+    QLabel *pgnTXMethodL = new QLabel(tr("TX Method"));
+    QComboBox *pgnTXMethod = new QComboBox;
+    pgnTXMethod->addItems(QStringList()<<"Cyclic"<<"OnEvent"<<"OnChange");
+
+    QLabel *pgnTXRateL = new QLabel(tr("TX Rate"));
+    QLineEdit *pgnTXRate = new QLineEdit;
+    pgnTXRate->setValidator(pgnValidForm->pgnValidTxRate);
+
+    QLabel *pgnDLCL = new QLabel(tr("DLC"));
+    QComboBox *pgnDLC = new QComboBox;
+    pgnDLC->addItems(QStringList()<<"0"<<"1"<<"2"<<"3"<<"4"<<"5"<<"6"<<"7");
+
+    QLabel *pgnPriorityL = new QLabel(tr("Priority"));
+    QComboBox *pgnPriority = new QComboBox;
+    pgnPriority->addItems(QStringList()<<"7"<<"6"<<"5"<<"4"<<"3"<<"2"<<"1");
+
+
+    formLayout->addRow(pgnNameL);
+    formLayout->addRow(pgnName);
+    formLayout->addRow(pgnNumberL);
+    formLayout->addRow(pgnNumber);
+    formLayout->addRow(pgnTXMethodL);
+    formLayout->addRow(pgnTXMethod);
+    formLayout->addRow(pgnTXRateL);
+    formLayout->addRow(pgnTXRate);
+    formLayout->addRow(pgnDLCL);
+    formLayout->addRow(pgnDLC);
+    formLayout->addRow(pgnPriorityL);
+    formLayout->addRow(pgnPriority);
 
     formGroupBox->setLayout(formLayout);
 //! [1]
+
+//! [1.5]
+      // TODO pass validators BOOL check ??
+//! [1.5]
 
 //! [2]
     buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok
